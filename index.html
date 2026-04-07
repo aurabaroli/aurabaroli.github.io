@@ -2,46 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aura Baroli</title>
+  <meta name="description" content="Aura Baroli portfolio and resume website">
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>Your Name</h1>
+  <main class="container">
+
+    <section class="card hero">
+      <h1>Aura Baroli</h1>
       <p class="tagline">Frontend Developer | Designer | Problem Solver</p>
       <div class="links">
-        <a href="https://github.com/yourusername">GitHub</a>
-        <a href="https://linkedin.com/in/yourname">LinkedIn</a>
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/yourname" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:you@example.com">Email</a>
-        <a href="/resume.pdf">Resume PDF</a>
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume PDF</a>
       </div>
-    </div>
+    </section>
 
-    <div class="card">
+    <section class="card">
       <h2>About</h2>
-      <p>Short intro about who you are, what you do, and what kind of work you're looking for.</p>
-    </div>
+      <p>
+        I am a frontend-focused developer with an interest in elegant digital experiences,
+        clean design systems, and intuitive user interfaces. I enjoy combining technical
+        precision with visual sensitivity to build websites and products that feel thoughtful,
+        polished, and easy to use.
+      </p>
+    </section>
 
-    <div class="card">
+    <section class="card">
+      <h2>Experience</h2>
+
+      <div class="entry">
+        <div class="entry-row top">
+          <span class="entry-left">Company Name</span>
+          <span class="entry-right">Milan, Italy</span>
+        </div>
+        <div class="entry-row bottom">
+          <span class="entry-left">Frontend Developer</span>
+          <span class="entry-right">Jan 2023 – Present</span>
+        </div>
+        <div class="entry-details">
+          <ul>
+            <li>Built and maintained responsive web interfaces with a strong focus on usability and visual clarity.</li>
+            <li>Improved performance and user experience through cleaner layouts, faster load times, and better interaction patterns.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-row top">
+          <span class="entry-left">Previous Company</span>
+          <span class="entry-right">Rome, Italy</span>
+        </div>
+        <div class="entry-row bottom">
+          <span class="entry-left">UI/UX Intern</span>
+          <span class="entry-right">Jun 2022 – Dec 2022</span>
+        </div>
+        <div class="entry-details">
+          <ul>
+            <li>Designed interface mockups and supported implementation in collaboration with developers and stakeholders.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Education</h2>
-      <p><strong>Bocconi University</strong> Aug. 2024 - Jul. 2027</p><br>Bachelor of Science in International Government and Politics</p>
-      <p>One or two impact-focused bullet points.</p>
-      <p><strong>Liceo Scientifico E. Amaldi</strong> — Company<br>Sept. 2019–Jul. 2024</p>
-      <p>One or two impact-focused bullet points.</p>
-    </div>
 
-    <div class="card">
+      <div class="entry">
+        <div class="entry-row top">
+          <span class="entry-left">University Name</span>
+          <span class="entry-right">Bologna, Italy</span>
+        </div>
+        <div class="entry-row bottom">
+          <span class="entry-left">BSc in Computer Science</span>
+          <span class="entry-right">2020 – 2023</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Projects</h2>
-      <p><strong>Project Name</strong> — <a href="#">Live Demo</a> | <a href="#">Code</a></p>
-      <p>What it does and why it matters.</p>
-    </div>
 
-    <div class="card">
+      <div class="entry">
+        <div class="entry-row top">
+          <span class="entry-left">Project Name</span>
+          <span class="entry-right">Personal Project</span>
+        </div>
+        <div class="entry-row bottom">
+          <span class="entry-left">Frontend Development</span>
+          <span class="entry-right">2024</span>
+        </div>
+        <div class="entry-details">
+          <p>
+            A short description of the project, what problem it solves, and what technologies you used.
+            <a href="#">Live Demo</a> |
+            <a href="#">Code</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
       <h2>Skills</h2>
       <p>HTML, CSS, JavaScript, React, Git, Figma</p>
-    </div>
-  </div>
+    </section>
+
+  </main>
 </body>
 </html>

@@ -5,9 +5,155 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Writings · Aura Baroli</title>
   <meta name="description" content="Essays, articles, and reflections by Aura Baroli.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="writings.css">
+  <style>
+/* Reuse the site's style.css. These low-priority defaults also let the new
+   pages open on their own when the original stylesheet is unavailable. */
+@layer writings-defaults {
+  body.writings-page {
+    margin: 0;
+    background: #f6f7f9;
+    color: #252a34;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .writings-page .container {
+    width: min(880px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 36px 0;
+  }
+
+  .writings-page .card {
+    margin-bottom: 24px;
+    padding: 36px;
+    background: #fff;
+    border: 1px solid #e3e6eb;
+    border-radius: 16px;
+  }
+
+  .writings-page h1 {
+    margin: 0 0 12px;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  .writings-page h2 { font-size: 1.25rem; }
+  .writings-page .tagline { margin: 0; }
+  .writings-page a { color: inherit; }
+}
+
+.writings-page *, .writings-page *::before, .writings-page *::after {
+  box-sizing: border-box;
+}
+
+.writing-site-header, .writing-site-header nav, .writing-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.writing-site-header { margin-bottom: 32px; }
+.writing-site-name { font-weight: 700; letter-spacing: -0.025em; }
+.writing-site-header a, .writing-footer a { text-decoration: none; }
+.writing-site-header nav { gap: 20px; font-size: 0.875rem; }
+.writing-site-header a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+.writing-site-header a:hover, .writing-footer a:hover { text-decoration: underline; text-underline-offset: 5px; }
+.writing-intro { padding-block: 44px; }
+.writing-directory > h2 { margin: 0 0 16px; }
+.writing-list { list-style: none; padding: 0; margin: 0; }
+.writing-list > li + li { border-top: 1px solid #dce0e6; }
+.writing-link { display: block; padding: 24px 0; color: inherit; text-decoration: none; }
+.writing-link h3 { margin: 8px 0; font-size: 1.2rem; line-height: 1.4; letter-spacing: -0.02em; }
+.writing-link p { margin: 0; line-height: 1.65; }
+.writing-link:hover h3 { text-decoration: underline; text-underline-offset: 5px; }
+.writing-arrow { display: inline-block; margin-left: 6px; font-size: 1rem; }
+.writing-meta { margin: 0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.025em; }
+.writing-back { display: inline-block; margin-bottom: 24px; font-size: 0.875rem; text-underline-offset: 4px; }
+.writing-article-header { padding-bottom: 28px; border-bottom: 1px solid #dce0e6; }
+.writing-article-header h1 { margin-top: 16px; overflow-wrap: anywhere; }
+.writing-deck { margin: 16px 0; font-size: 1.125rem; line-height: 1.6; }
+.writing-byline { margin: 16px 0 8px; font-size: 0.875rem; }
+.writing-prose { max-width: 66ch; margin-inline: auto; padding-top: 12px; font-size: 1.0625rem; line-height: 1.85; overflow-wrap: anywhere; }
+.writing-prose p { margin: 1.25em 0; }
+.writing-prose h2, .writing-prose h3 { margin-top: 1.8em; line-height: 1.4; }
+.writing-prose blockquote { margin: 28px 0; padding: 0 0 0 24px; border-left: 3px solid #aab2bf; font-style: italic; }
+.writing-prose a { text-decoration: underline; text-underline-offset: 3px; }
+.writing-prose img { display: block; max-width: 100%; height: auto; }
+.writing-prose pre { max-width: 100%; overflow-x: auto; }
+.writing-footer { margin-top: 32px; padding: 0 4px 12px; font-size: 0.8rem; }
+.writings-page a:focus-visible { outline: 3px solid #526589; outline-offset: 5px; border-radius: 2px; }
+.skip-link { position: absolute; top: 8px; left: 8px; padding: 12px 16px; background: #fff; color: #252a34 !important; border: 1px solid #252a34; z-index: 10; transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
+
+@media (max-width: 560px) {
+  .writings-page .container { width: calc(100% - 32px); padding-block: 24px; }
+  .writings-page .card { padding: 24px; }
+  .writing-site-header { gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .writing-site-header nav { gap: 16px; }
+  .writing-footer { flex-wrap: wrap; gap: 16px; }
+  .writing-prose { font-size: 1rem; }
+}
+
+@media print {
+  .writing-site-header, .writing-back, .writing-footer, .skip-link { display: none; }
+  body.writings-page { background: #fff; color: #000; }
+  .writings-page .container { width: 100%; padding: 0; }
+  .writings-page .card { border: 0; border-radius: 0; padding: 0; box-shadow: none; }
+  .writing-prose { max-width: none; }
+}
+
+/* Directory entry layout and separate reading buttons. */
+.writings-page .writing-entry {
+  padding: 24px 0;
+}
+.writings-page .writing-entry h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.writings-page .writing-entry > p {
+  margin: 0 0 14px;
+  line-height: 1.65;
+}
+.writings-page .writing-entry .writing-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 0.85rem;
+}
+.writings-page .writing-read-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 16px;
+  border: 1px solid #222;
+  border-radius: 8px;
+  background: #222;
+  color: #fff !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.writings-page .writing-read-button:hover {
+  background: #444;
+}
+.writings-page .writing-read-button:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 4px;
+}
+
+  </style>
 </head>
 <body class="writings-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -29,22 +175,34 @@
       <section class="card writing-directory" aria-labelledby="directory-title">
         <h2 id="directory-title">All writings</h2>
         <ul class="writing-list">
-          <!-- Copy this <li> for each piece. Update the link, title, and description. -->
+
+          <!-- To add a writing, copy this entire <li> and edit its content,
+               author, publication date, link, and the Read button's aria-label. -->
           <li>
-            <a class="writing-link" href="writings/the-idiot.html">
-              <h3>The Idiot </h3>
-            </a>
+            <article class="writing-entry">
+              <h3>The Idiot</h3>
+              <p>A personal piece about the inner darkness of the human mind.</p>
+
+              <p class="writing-entry-meta">
+                <span>By Aura Baroli</span>
+                <span>
+                  Published:
+                  <!-- Replace the next span with a time element containing the
+                       actual date, in this format:
+                       <time datetime="YYYY-MM-DD">Day Month Year</time>
+                  -->
+                  <span class="publication-date">Not specified</span>
+                </span>
+              </p>
+
+              <a class="writing-read-button"
+                 href="writings/the-idiot.html"
+                 aria-label="Read The Idiot">
+                Read <span aria-hidden="true">→</span>
+              </a>
+            </article>
           </li>
-          <li>
-            <a class="writing-link" href="writings/the-first.html">
-              <h3>The First </h3>
-            </a>
-          </li>
-          <li>
-            <a class="writing-link" href="writings/the-wound.html">
-              <h3>The Wound </h3>
-            </a>
-          </li>
+
         </ul>
       </section>
     </main>

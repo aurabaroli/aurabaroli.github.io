@@ -1,4 +1,20 @@
 /* Shared foundations for the homepage, writings directory, and article pages. */
+
+@font-face {
+  font-family: "Allo";
+  src: url("fonts/AlloVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Allo";
+  src: url("fonts/Allo-Oblique.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 :root {
   --color-text: #1a1a1a;
   --color-heading: #111;

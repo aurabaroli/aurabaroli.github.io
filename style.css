@@ -1,4 +1,20 @@
-* {
+/* Shared foundations for the homepage, writings directory, and article pages. */
+:root {
+  --color-text: #1a1a1a;
+  --color-heading: #111;
+  --color-muted: #666;
+  --color-background: #fafaf8;
+  --color-link: #1d4f91;
+  --color-divider: rgba(0, 0, 0, 0.08);
+  --font-size-text: clamp(1rem, 2.4vw, 1.125rem);
+  --font-size-small: 0.875rem;
+  --font-weight-title: 700;
+  --font-weight-heading: 600;
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -12,8 +28,8 @@ body {
   font-size: 18px;
   line-height: 1.75;
   letter-spacing: -0.01em;
-  color: #1a1a1a;
-  background: #fafaf8;
+  color: var(--color-text);
+  background: var(--color-background);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   transition: background 0.3s ease, color 0.3s ease;
@@ -37,9 +53,7 @@ body {
     box-shadow 0.22s ease,
     border-color 0.22s ease,
     background 0.22s ease;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: cardFade 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: cardFade 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
 .card:hover {
@@ -56,6 +70,10 @@ body {
 .card:nth-child(6) { animation-delay: 0.7s; }
 
 @keyframes cardFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -66,45 +84,45 @@ h1,
 h2,
 h3 {
   margin-top: 0;
-  color: #111;
+  color: var(--color-heading);
   line-height: 1.2;
 }
 
 h1 {
   font-size: clamp(2.2rem, 5vw, 2.75rem);
-  font-weight: 700;
+  font-weight: var(--font-weight-title);
   margin-bottom: 8px;
   letter-spacing: -0.03em;
 }
 
 h2 {
   font-size: clamp(1.45rem, 3.5vw, 1.7rem);
-  font-weight: 600;
+  font-weight: var(--font-weight-heading);
   margin-bottom: 14px;
   letter-spacing: -0.02em;
 }
 
 h3 {
   font-size: clamp(1.15rem, 3vw, 1.3rem);
-  font-weight: 600;
+  font-weight: var(--font-weight-heading);
   margin-bottom: 10px;
   letter-spacing: -0.02em;
 }
 
 p {
   margin: 10px 0 0;
-  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  font-size: var(--font-size-text);
 }
 
 .tagline {
   margin-top: 0;
-  color: #666;
+  color: var(--color-muted);
   font-size: clamp(1rem, 2.6vw, 1.15rem);
   font-style: italic;
 }
 
 a {
-  color: #1d4f91;
+  color: var(--color-link);
   text-decoration: none;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
@@ -114,24 +132,44 @@ a:hover {
   text-decoration: underline;
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 4px;
+}
+
 .links {
   margin-top: 22px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
 }
 
-.top-button {
+/* One button component. Older class names remain compatible with article pages. */
+.button,
+.top-button,
+.writing-read-button,
+button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
+  gap: 8px;
+  width: auto;
+  min-width: 0;
+  height: auto;
   padding: 10px 16px;
+  border: 1px solid #000;
   border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  color: #1a1a1a;
+  background: #000;
+  color: #fff;
+  font-family: inherit;
   font-size: 0.95rem;
   font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
   text-decoration: none;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   transition:
@@ -142,22 +180,54 @@ a:hover {
     color 0.2s ease;
 }
 
-.top-button:hover {
+.button:hover,
+.top-button:hover,
+.writing-read-button:hover,
+button:hover {
   transform: translateY(-2px);
-  background: #f5f5f3;
-  border-color: rgba(0, 0, 0, 0.12);
+  background: #222;
+  border-color: #222;
+  color: #fff;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   text-decoration: none;
-  color: #111;
 }
 
-.top-button:active {
+.button:active,
+.top-button:active,
+.writing-read-button:active,
+button:active {
   transform: translateY(0);
 }
 
-.top-button:focus {
-  outline: 2px solid rgba(29, 79, 145, 0.28);
-  outline-offset: 3px;
+.button:focus-visible,
+.top-button:focus-visible,
+.writing-read-button:focus-visible,
+button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}
+
+.button-icon,
+.reading-arrow {
+  display: block;
+  position: static;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.button-icon.linkedin-logo {
+  fill: currentColor;
+  stroke: none;
 }
 
 .entry {
@@ -166,7 +236,7 @@ a:hover {
 
 .entry + .entry {
   padding-top: 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid var(--color-divider);
 }
 
 .entry-row {
@@ -177,7 +247,7 @@ a:hover {
 }
 
 .entry-row.top {
-  font-weight: 700;
+  font-weight: var(--font-weight-title);
 }
 
 .entry-row.bottom {
@@ -188,7 +258,7 @@ a:hover {
 
 .entry-left,
 .entry-right {
-  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  font-size: var(--font-size-text);
 }
 
 .entry-left {
@@ -232,50 +302,19 @@ ul {
 
 li {
   margin-bottom: 8px;
-  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  font-size: var(--font-size-text);
 }
 
 small,
 .muted {
-  color: #6f6f6f;
+  color: var(--color-muted);
 }
 
 hr {
   border: 0;
   height: 1px;
-  background: rgba(0, 0, 0, 0.08);
+  background: var(--color-divider);
   margin: 24px 0;
-}
-
-.button,
-button {
-  display: inline-block;
-  font: inherit;
-  background: #111;
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  padding: 10px 18px;
-  cursor: pointer;
-  text-decoration: none;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    opacity 0.2s ease,
-    background 0.2s ease;
-}
-
-.button:hover,
-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-  opacity: 0.96;
-}
-
-.button:active,
-button:active {
-  transform: translateY(0);
-  box-shadow: none;
 }
 
 img {
@@ -287,10 +326,20 @@ img {
   background: rgba(29, 79, 145, 0.16);
 }
 
-a:focus,
-button:focus {
-  outline: 2px solid rgba(29, 79, 145, 0.35);
-  outline-offset: 3px;
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  padding: 12px 16px;
+  background: #fff;
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 @media (max-width: 640px) {
@@ -308,16 +357,11 @@ button:focus {
     margin-bottom: 20px;
   }
 
-  .links {
-    gap: 8px;
-  }
-
-  .top-button {
-    width: 100%;
-    justify-content: center;
-    padding: 11px 14px;
+  .button,
+  .top-button,
+  .writing-read-button,
+  button {
     border-radius: 12px;
-    font-size: 0.95rem;
   }
 
   .entry-row {
@@ -340,27 +384,25 @@ button:focus {
   .entry-with-logo {
     gap: 8px;
   }
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  .top-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 
-  .top-button .button-icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .card:hover,
+  .button:hover,
+  .top-button:hover,
+  .writing-read-button:hover,
+  button:hover {
+    transform: none;
   }
 }
